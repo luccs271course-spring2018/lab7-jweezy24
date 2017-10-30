@@ -10,13 +10,18 @@ public class ReverseLines {
 
 
     final Scanner input = new Scanner(System.in);
-    while (input.hasNextLine()) {
-      final String line = input.nextLine();
+    printReverse(input);
+  }
+  public static void printReverse(Scanner input){
 
-
-
-    }
-
+        if (input.hasNext()) {
+          final String line = input.nextLine();
+          System.out.println(line);
+          printReverse(input);
+          System.out.println(line);
+        } else {
+          return;
+        }
 
 
   }
