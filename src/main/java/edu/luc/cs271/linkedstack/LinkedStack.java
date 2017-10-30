@@ -1,7 +1,7 @@
 package edu.luc.cs271.linkedstack;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class LinkedStack<E> implements IStack<E> {
@@ -22,27 +22,23 @@ public class LinkedStack<E> implements IStack<E> {
   public E peek() {
     if (top != null) {
       return top.data;
-    }
-    else {
+    } else {
       throw new NoSuchElementException();
     }
   }
 
   @Override
   public E pop() {
-    if(top != null) {
+    if (top != null) {
       Node<E> tempNode = top;
       top = top.next;
       return tempNode.data;
-    }else
-      throw new NoSuchElementException();
-
+    } else throw new NoSuchElementException();
   }
 
   @Override
   public boolean isEmpty() {
-    if (top == null)
-      return true;
+    if (top == null) return true;
 
     return false;
   }
@@ -52,18 +48,16 @@ public class LinkedStack<E> implements IStack<E> {
     // TODO implement using an ArrayList preallocated with the right size
     // TODO add any instance variable(s) required to support this
     List<E> list = new ArrayList<E>();
-    System.out.println(iter(top,list));
+    System.out.println(iter(top, list));
 
     return list;
   }
-  <E> List<E> iter (Node<E> top, List<E> list)
-  {
-    if(top != null) {
+
+  <E> List<E> iter(Node<E> top, List<E> list) {
+    if (top != null) {
       list.add(top.data);
-      if (top.next != null)
-        iter(top.next, list);
+      if (top.next != null) iter(top.next, list);
     }
     return list;
-
   }
 }
