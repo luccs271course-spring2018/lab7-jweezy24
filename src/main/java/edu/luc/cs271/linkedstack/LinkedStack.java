@@ -8,12 +8,13 @@ public class LinkedStack<E> implements IStack<E> {
 
   /** The topmost node of this stack. The stack gets pushed down from here. */
   private Node<E> top;
-
+  private int size = 0;
   @Override
   public E push(final E obj) {
     Node<E> tempNode = top;
     top = new Node<>(obj);
     top.next = tempNode;
+
 
     return obj;
   }
@@ -29,16 +30,17 @@ public class LinkedStack<E> implements IStack<E> {
 
   @Override
   public E pop() {
-    if (top != null) {
+    if (top != null && size <1) {
       Node<E> tempNode = top;
       top = top.next;
+
       return tempNode.data;
     } else throw new NoSuchElementException();
   }
 
   @Override
   public boolean isEmpty() {
-    if (top == null) return true;
+    if (top == null && size <1) return true;
 
     return false;
   }
@@ -52,6 +54,34 @@ public class LinkedStack<E> implements IStack<E> {
 
     return list;
   }
+
+  private void populateList(final Node<E> curr, final List<E> result) {
+    // TODO recursively populate the list in the desired order
+    result.add(0,((E)curr.data));
+    if(curr.next != null)
+    populateList(curr.next,result);
+
+
+
+
+  }
+
+  @Override
+  public List<E> asFifoList() {
+    final ArrayList<E> result = new ArrayList<>(size);
+    if(top != null)
+      populateFifoList(top, result); // TODO replace null with the right reference
+    return result;
+  }
+
+  private void populateFifoList(final Node<E> curr, final List<E> result) {
+    // TODO recursively populate the list in the desired orde
+    result.add((E)curr.data);
+    populateList(curr.next,result);
+
+
+  }
+
 
   <E> List<E> iter(Node<E> top, List<E> list) {
     if (top != null) {
